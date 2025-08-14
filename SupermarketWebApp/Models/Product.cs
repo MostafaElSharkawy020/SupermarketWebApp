@@ -9,6 +9,7 @@
         public string imagePath { get; set; }
         public int quantity { get; set; }
         public int categoryId { get; set; }
+        public List<OrderItem> orderItems { get; set; } = new List<OrderItem>();
         public Category category { get; set; }
     }
 }
