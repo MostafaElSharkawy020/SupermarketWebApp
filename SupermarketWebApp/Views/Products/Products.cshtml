@@ -1,10 +1,36 @@
 ﻿@model List<SupermarketWebApp.Models.Product>
 
-@foreach(var product in Model)
-{
-	<div class="product">
-		<h2>@product.name</h2>
-		<p>Price: @product.price.ToString("C")</p>
-		<hr />
-	</div>
-}
+<div class="row mb-4">
+    <div class="col-md-4">
+        <label for="categoryDropdown" class="form-label fw-bold">Select Category</label>
+        <select id="categoryDropdown" class="form-select">
+            <option value="0">All Categories</option>
+            @foreach (var category in ViewBag.Categories)
+            {
+                <option value="@category.id">@category.name</option>
+            }
+        </select>
+    </div>
+</div>
+
+<div class="row" id="productListContainer">
+    @await Html.PartialAsync("_ProductsPartialView", Model)
+</div>
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).on("change", "#categoryDropdown", function () {
+            var categoryId = $(this).val();
+
+            $.ajax({
+                url: '@Url.Action("FilterByCategory", "Products")',
+                type: "GET",
+                data: { categoryId: categoryId },
+                success: function (result) {
+                    $("#productListContainer").html(result);
+                }
+            });
+        });
+    </script>
+    }
