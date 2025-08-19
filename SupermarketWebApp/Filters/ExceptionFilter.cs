@@ -11,13 +11,13 @@ namespace SupermarketWebApp.Filters
         {
             _logger = logger;
         }
-
         public void OnException(ExceptionContext context)
         {
             _logger.LogError(context.Exception, "Unhandled exception occurred.");
 
-            context.Result = new ViewResult { ViewName = "NewProduct" };
             context.ExceptionHandled = true;
+            context.Result = new ViewResult { ViewName = "Error" };
+            
         }
     }
 }
