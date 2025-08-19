@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SupermarketWebApp.Data;
 using SupermarketWebApp.Models;
+using SupermarketWebApp.Repositories;
 
 namespace SupermarketWebApp.Controllers
 {
     public class AdminController : Controller
     {
         private readonly AppDbContext context = new AppDbContext();
+        private readonly IAdminRepository adminRepository = new AdminRepository();
         public IActionResult NewProductPage()
         {
             ViewBag.Categories = context.Categories.ToList();
@@ -15,10 +17,8 @@ namespace SupermarketWebApp.Controllers
 
         public IActionResult AddProduct(Product product)
         {
-            product.imagePath = "https://via.placeholder.com/150"; // Default image path
-            context.Products.Add(product);
-            context.SaveChanges();
-            return View("AllProductsAdmin",context.Products.ToList());
+            adminRepository.AddProduct(product);
+            return RedirectToAction("allproducts");
         }
 
         public IActionResult AllProducts()
@@ -37,30 +37,14 @@ namespace SupermarketWebApp.Controllers
 
         public IActionResult UpdateProduct(Product product)
         {
-            var existingProduct = context.Products.FirstOrDefault(m => m.id == product.id);
-            if (existingProduct != null)
-            {
-                existingProduct.name = product.name;
-                existingProduct.description = product.description;
-                existingProduct.price = product.price;
-                existingProduct.imagePath = product.imagePath;
-                existingProduct.quantity = product.quantity;
-                existingProduct.categoryId = product.categoryId;
-                existingProduct.imagePath = product.imagePath ?? "https://via.placeholder.com/150"; // Default image path if not provided
-                context.SaveChanges();
-            }
+            adminRepository.UpdateProduct(product);
             return RedirectToAction("allproducts");
         }
 
         [HttpPost]
         public IActionResult DeleteProduct(int id)
         {
-            var product = context.Products.FirstOrDefault(m => m.id == id);
-            if (product != null)
-            {
-                context.Products.Remove(product);
-                context.SaveChanges();
-            }
+            adminRepository.DeleteProduct(id);
             return RedirectToAction("allproducts");
         }
     }

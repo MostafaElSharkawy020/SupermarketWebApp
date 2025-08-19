@@ -1,3 +1,6 @@
+using SupermarketWebApp.Filters;
+using SupermarketWebApp.Repositories;
+
 namespace SupermarketWebApp
 {
     public class Program
@@ -7,7 +10,12 @@ namespace SupermarketWebApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<ExceptionFilter>();
+            });
+
+            builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
             var app = builder.Build();
 
