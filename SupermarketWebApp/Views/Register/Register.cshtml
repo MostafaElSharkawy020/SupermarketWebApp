@@ -1,99 +1,77 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Travel Explorer - Register</title>
-    <link rel="stylesheet" href="~/css/register.css" />
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">Supermarket</div>
-            <ul class="nav-menu">
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <div class="register-container">
-            <div class="register-form">
-                <h2>Create Your Account</h2>
-                <form id="registerForm" onsubmit="return validateRegisterForm()">
-                    <div class="form-group">
-                        <label for="firstName">First Name:</label>
-                        <input type="text" id="firstName" name="firstName" required />
-                        <span class="error" id="firstNameError"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastName">Last Name:</label>
-                        <input type="text" id="lastName" name="lastName" required />
-                        <span class="error" id="lastNameError"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required />
-                        <span class="error" id="emailError"></span>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" required />
-                        <span class="error" id="passwordError"></span>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <label for="confirmPassword">Confirm Password:</label>
-                        <input type="password"
-                               id="confirmPassword"
-                               name="confirmPassword"
-                               required />
-                        <span class="error" id="confirmPasswordError"></span>
-                    </div>
-
-
-
-                    <div class="form-group">
-                        <label for="phone">Phone Number:</label>
-                        <input type="tel" id="phone" name="phone" required />
-                        <span class="error" id="phoneError"></span>
-                    </div>
-
-
-
-
-                    <div class="form-group">
-                        <label for="address">Address:</label>
-                        <input type="text" id="address" name="address" required />
-                        <span class="error" id="addressError"></span>
-                    </div>
-
-                    <div class="form-group">
-                        <button type="submit">Register</button>
-                    </div>
-
-                    <div class="form-links">
-                        <p>
-                            Already have an account? <a href="login.html">Login here</a>
-                        </p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Online Supermarket. All rights reserved.</p>
-    </footer>
-
-    <script src="~/js/auth.js"></script>
-    @* <script src="js/register.js"></script> *@
-</body>
-</html>
-    
+﻿@model RegisterViewModel
 @{
+    ViewData["Title"] = "Register";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/register.css" />
+}
+
+<div class="register-container">
+    <div class="register-form">
+        <h2>Create Your Account</h2>
+
+        <form asp-action="Register" method="post">
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="firstName"></label>
+                <input asp-for="firstName" class="form-control" />
+                <span asp-validation-for="firstName" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="lastName"></label>
+                <input asp-for="lastName" class="form-control" />
+                <span asp-validation-for="lastName" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="email"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="password"></label>
+                <input asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="confirmPassword"></label>
+                <input asp-for="confirmPassword" class="form-control" />
+                <span asp-validation-for="confirmPassword" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="phoneNumber"></label>
+                <input asp-for="phoneNumber" class="form-control" />
+                <span asp-validation-for="phoneNumber" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="address"></label>
+                <input asp-for="address" class="form-control" />
+                <span asp-validation-for="address" class="error"></span>
+            </div>
+
+            <div class="form-group">
+                <button type="submit">Register</button>
+            </div>
+
+            <div class="form-links">
+                <p>
+                    Already have an account?
+                    <a asp-action="Login" asp-controller="Account">Login here</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }

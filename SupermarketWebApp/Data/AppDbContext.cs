@@ -74,34 +74,3 @@ namespace SupermarketWebApp.Data
     }
 }
 
-//modelBuilder.Entity<StudentCourse>().HasKey(sc => new { sc.SId, sc.CId });
-
-//modelBuilder.Entity<StudentCourse>()
-//.HasOne<Student>(sc => sc.Student)
-//.WithMany(s => s.StudentCourses)
-//.HasForeignKey(sc => sc.SId);
-
-
-//modelBuilder.Entity<StudentCourse>()
-//.HasOne<Course>(sc => sc.Course)
-//.WithMany(s => s.StudentCourses)
-//.HasForeignKey(sc => sc.CId);
-
-
-
-//modelBuilder.Entity<User>()
-//                .HasMany(u => u.Orders)
-//                .WithOne(o => o.User)
-//                .HasForeignKey(o => o.UserId);
-//modelBuilder.Entity<Order>()
-//    .HasMany(o => o.OrderItems)
-//    .WithOne(oi => oi.Order)
-//    .HasForeignKey(oi => oi.OrderId);
-//modelBuilder.Entity<Product>()
-//    .HasMany(p => p.OrderItems)
-//    .WithOne(oi => oi.Product)
-//    .HasForeignKey(oi => oi.ProductId);
-//modelBuilder.Entity<Category>()
-//    .HasMany(c => c.Products)
-//    .WithOne(p => p.Category)
-//    .HasForeignKey(p => p.CategoryId);

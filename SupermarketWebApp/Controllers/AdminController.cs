@@ -21,6 +21,7 @@ namespace SupermarketWebApp.Controllers
             return View("AllProductsAdmin",context.Products.ToList());
         }
 
+
         public IActionResult AllProducts()
         {
             ViewBag.Categories = context.Categories.ToList();
