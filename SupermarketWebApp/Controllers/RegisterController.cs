@@ -6,7 +6,7 @@ namespace SupermarketWebApp.Controllers
     {
         public IActionResult viewRegister()
         {
-            return View("Register-Login/Register");
+            return View("Register");
         }
     }
 }
