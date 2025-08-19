@@ -24,5 +24,17 @@ namespace SupermarketWebApp.Controllers
             }
             return PartialView("_ProductsPartialView",products);
         }
+
+        public IActionResult Search(string searchString)
+        {
+            var products = context.Products.ToList();
+            if (!string.IsNullOrWhiteSpace(searchString))
+            {
+                products = products
+                    .Where(p => p.name.Contains(searchString, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+            }
+            return PartialView("_ProductsPartialView", products);
+        }
     }
 }

@@ -11,6 +11,10 @@
             }
         </select>
     </div>
+    <div class="col-md-4">
+        <label for="searchBox" class="form-label fw-bold">Search Products</label>
+        <input type="text" id="searchBox" class="form-control" placeholder="Type to search..." autocomplete="off" />
+    </div>
 </div>
 
 <div class="row" id="productListContainer">
@@ -30,6 +34,21 @@
                 success: function (result) {
                     $("#productListContainer").html(result);
                 }
+            });
+        });
+
+        $(document).ready(function () {
+            $("#searchBox").on("keyup", function () {
+                var query = $(this).val();
+
+                $.ajax({
+                    url: '@Url.Action("Search", "Products")',
+                    type: "GET",
+                    data: { searchString: query },
+                    success: function (result) {
+                        $("#productListContainer").html(result);
+                    }
+                });
             });
         });
     </script>

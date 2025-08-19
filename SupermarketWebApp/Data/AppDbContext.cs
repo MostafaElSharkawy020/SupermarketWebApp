@@ -63,8 +63,11 @@ namespace SupermarketWebApp.Data
                 .HasData
                 (new List<Category>
                 {
-                    new Category { id = 1, name = "Fruits" ,description="dzdbzxfxbd",imagePath="dgafddsfs"},
-                    new Category { id = 2, name = "Vegetables",description = "dzdbzxfxbd",imagePath = "dgafddsfs" }
+                    new Category { id = 3, name = "Meat" ,description="dzdbzxfxbd",imagePath="dgafddsfs"},
+                    new Category { id = 4, name = "Poultry",description = "dzdbzxfxbd",imagePath = "dgafddsfs" },
+                    new Category { id = 5, name = "Food Legumes" ,description="dzdbzxfxbd",imagePath="dgafddsfs"},
+                    new Category { id = 6, name = "Canned Food" ,description="dzdbzxfxbd",imagePath="dgafddsfs"},
+                    new Category { id = 7, name = "Drinks",description = "dzdbzxfxbd",imagePath = "dgafddsfs" }
                 });
         }
 

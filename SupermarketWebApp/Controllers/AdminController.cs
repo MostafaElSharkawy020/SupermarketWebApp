@@ -6,7 +6,7 @@ namespace SupermarketWebApp.Controllers
 {
     public class AdminController : Controller
     {
-        public AppDbContext context = new AppDbContext();
+        private readonly AppDbContext context = new AppDbContext();
         public IActionResult NewProductPage()
         {
             ViewBag.Categories = context.Categories.ToList();
@@ -18,7 +18,14 @@ namespace SupermarketWebApp.Controllers
             product.imagePath = "https://via.placeholder.com/150"; // Default image path
             context.Products.Add(product);
             context.SaveChanges();
-            return RedirectToAction("AllProducts", "Products");
+            return View("AllProductsAdmin",context.Products.ToList());
+        }
+
+        public IActionResult AllProducts()
+        {
+            ViewBag.Categories = context.Categories.ToList();
+            var products = context.Products.ToList();
+            return View("AllProductsAdmin",products);
         }
     }
 }
