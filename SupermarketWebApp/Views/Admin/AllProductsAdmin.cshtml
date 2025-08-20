@@ -29,11 +29,11 @@
                 <img src="@product.imagePath" class="card-img-top" alt="@product.name" style="height:200px;object-fit:cover;" />
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title">@product.name</h5>
-                    <p class="card-text">Price: @product.price.ToString("C0") L.E</p>
+                    <p class="card-text">Price: @product.price.ToString() L.E</p>
 					<p class="card-text">Quantity: @product.quantity</p>
 					<p class="card-text">@product.description</p>
 					<p class="card-text">Category: @product.category.name</p>
-                    <a asp-controller="Admin" asp-action="EditProduct" asp-route-id="@product.id" class="btn btn-success w-100">Edit</a>
+                    <a asp-controller="Admin" asp-action="UpdateProductPage" asp-route-id="@product.id" class="btn btn-success w-100">Edit</a>
                 </div>
             </div>
         </div>

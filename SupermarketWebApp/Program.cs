@@ -1,3 +1,7 @@
+using Microsoft.AspNetCore.Mvc;
+using SupermarketWebApp.Filters;
+using SupermarketWebApp.Repositories;
+
 namespace SupermarketWebApp
 {
     public class Program
@@ -7,7 +11,27 @@ namespace SupermarketWebApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews();
+            builder.Services.AddControllersWithViews(options =>
+            {
+                options.Filters.Add<ExceptionFilter>();
+            });
+
+            builder.Services.AddApiVersioning(options =>
+            {
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+            });
+
+            builder.Services.AddAuthentication("Identity.Application")
+            .AddCookie("Identity.Application");
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+            });
+
+            builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
             var app = builder.Build();
 
@@ -27,6 +51,8 @@ namespace SupermarketWebApp
                 .WithStaticAssets();
 
             app.Run();
+
+
         }
     }
 }

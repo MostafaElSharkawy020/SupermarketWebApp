@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SupermarketWebApp.Data;
 using SupermarketWebApp.Models;
+using SupermarketWebApp.Repositories;
 
 namespace SupermarketWebApp.Controllers
 {
     public class AdminController : Controller
     {
         private readonly AppDbContext context = new AppDbContext();
+        private readonly IAdminRepository adminRepository = new AdminRepository();
         public IActionResult NewProductPage()
         {
             ViewBag.Categories = context.Categories.ToList();
@@ -15,10 +17,8 @@ namespace SupermarketWebApp.Controllers
 
         public IActionResult AddProduct(Product product)
         {
-            product.imagePath = "https://via.placeholder.com/150"; // Default image path
-            context.Products.Add(product);
-            context.SaveChanges();
-            return View("AllProductsAdmin",context.Products.ToList());
+            adminRepository.AddProduct(product);
+            return RedirectToAction("allproducts");
         }
 
 
@@ -27,6 +27,26 @@ namespace SupermarketWebApp.Controllers
             ViewBag.Categories = context.Categories.ToList();
             var products = context.Products.ToList();
             return View("AllProductsAdmin",products);
+        }
+
+        public IActionResult UpdateProductPage(int id)
+        {
+            ViewBag.Categories = context.Categories.ToList();
+            var product = context.Products.FirstOrDefault(m => m.id == id);
+            return View("UpdateProduct",product);
+        }
+
+        public IActionResult UpdateProduct(Product product)
+        {
+            adminRepository.UpdateProduct(product);
+            return RedirectToAction("allproducts");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteProduct(int id)
+        {
+            adminRepository.DeleteProduct(id);
+            return RedirectToAction("allproducts");
         }
     }
 }
