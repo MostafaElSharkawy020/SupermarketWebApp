@@ -47,5 +47,10 @@ namespace SupermarketWebApp.Controllers
             adminRepository.DeleteProduct(id);
             return RedirectToAction("allproducts");
         }
+
+        public IActionResult TestException()
+        {
+            throw new Exception("Test exception");
+        }
     }
 }
