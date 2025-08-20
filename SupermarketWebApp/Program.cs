@@ -11,10 +11,11 @@ namespace SupermarketWebApp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            builder.Services.AddControllersWithViews(options =>
-            {
-                options.Filters.Add<ExceptionFilter>();
-            });
+            //builder.Services.AddControllersWithViews(options =>
+            //{
+            //    options.Filters.Add<ExceptionFilter>();
+            //});
+            builder.Services.AddControllersWithViews();
 
             builder.Services.AddApiVersioning(options =>
             {

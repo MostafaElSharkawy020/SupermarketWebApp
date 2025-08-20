@@ -1,4 +1,6 @@
-﻿namespace SupermarketWebApp.Models
+﻿using Microsoft.AspNetCore.Identity;
+
+namespace SupermarketWebApp.Models
 {
     public class User
     {
@@ -10,7 +12,7 @@
         public string phoneNumber { get; set; }
         public string address { get; set; }
         public List<Order> orders { get; set; } = new List<Order>();
-        public int cardId { get; set; }
-        public Card card { get; set; }
+        public int? cardId { get; set; }
+        public Card? card { get; set; }
     }
 }
